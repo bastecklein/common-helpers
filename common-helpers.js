@@ -3,7 +3,7 @@
  * @param {number} min - The minimum value
  * @param {number} max - The maximum value
  */
-export function randomIntFromInverval(min, max) {
+export function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -55,11 +55,11 @@ export function randomArrayElement(arr) {
         return null;
     }
 
-    return arr[randomIntFromInverval(0, arr.length - 1)];
+    return arr[randomIntFromInterval(0, arr.length - 1)];
 }
 
 export default {
-    randomIntFromInverval,
+    randomIntFromInterval,
     replaceAll,
     guid,
     randomArrayElement
