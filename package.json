@@ -1,0 +1,30 @@
+{
+    "name": "common-helpers",
+    "version": "1.0.0",
+    "description": "A collection of helper functions that can be used in any javascript project.",
+    "keywords": ["helpers", "library", "ape apps", "module"],
+    "homepage": "https://www.ape-apps.com",
+    "bugs": {
+        "email": "support@ape-apps.com"
+    },
+    "author": {
+        "name": "Ape Apps",
+        "email": "support@ape-apps.com",
+        "url": "https://www.ape-apps.com"
+    },
+    "funding": {
+        "type": "patreon",
+        "url": "https://www.patreon.com/apeapps"
+    },
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bastecklein/common-helpers"
+    },
+    "main": "common-helpers.js",
+    "config": {},
+    "dependencies": {},
+    "devDependencies": {},
+    "private": false,
+    "type": "module"
+}
