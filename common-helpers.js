@@ -58,9 +58,31 @@ export function randomArrayElement(arr) {
     return arr[randomIntFromInterval(0, arr.length - 1)];
 }
 
+/**
+ * Returns the file (or directory) name from a path, platform agnostic
+ * @param {string} path - The path to get the filename from
+ * @returns - The filename
+*/
+export function filenameFromPath(path) {
+    let sep = "/";
+
+    if(path.indexOf(sep) == -1) {
+        sep = "\\";
+    }
+
+    if(path.indexOf(sep) == -1) {
+        return path;
+    }
+
+    const parts = path.split(sep);
+
+    return parts[parts.length - 1];
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
     guid,
-    randomArrayElement
+    randomArrayElement,
+    filenameFromPath
 };
