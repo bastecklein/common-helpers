@@ -115,6 +115,12 @@ export function createClassedElement(tag, classes, content, color, callback) {
     return ele;
 }
 
+/**
+ * Returns a color based on a percentage
+ * @param {number} pct - The percentage to get the color for (between 0 and 1)
+ * @param {array} percentColors - The colors to use for the percentage (optional)
+ * @returns {string} - The hex color for the percentage
+ */
 export function getColorForPercentage(pct, percentColors) {
     if(!percentColors) {
         percentColors = [
@@ -149,6 +155,14 @@ export function getColorForPercentage(pct, percentColors) {
     return rgbToHex(color.r, color.g, color.b);
 }
 
+/**
+ * Converts an RGB color to a hex color
+ * @param {number} r - The red value
+ * @param {number} g - The green value
+ * @param {number} b - The blue value
+ * @returns {string} - The hex color
+ */
+
 export function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
@@ -158,6 +172,12 @@ function componentToHex(c) {
     return hex.length == 1 ? "0" + hex : hex;
 }
 
+/**
+ * Returns a random hex color
+ * @param {number} maxLightness - The maximum lightness value
+ * @param {number} minLightness - The minimum lightness value
+ * @returns {string} - The random hex color
+ */
 export function randomHexColor(maxLightness,minLightness) {
     if(!maxLightness) {
         maxLightness = 255;
@@ -174,6 +194,11 @@ export function randomHexColor(maxLightness,minLightness) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+/**
+ * Converts a hex color to an RGB color
+ * @param {string} hex - The hex color
+ * @returns {object} - The RGB color
+ */
 export function hexToRGB(hex) {
 
     let result;
