@@ -115,11 +115,106 @@ export function createClassedElement(tag, classes, content, color, callback) {
     return ele;
 }
 
+export function getColorForPercentage(pct, percentColors) {
+    if(!percentColors) {
+        percentColors = [
+            { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
+            { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
+            { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } 
+        ];
+    }
+
+    let iVal = 2;
+
+    for (let i = 1; i < percentColors.length - 1; i++) {
+        if (pct < percentColors[i].pct) {
+            iVal = i;
+            break;
+        }
+    }
+
+    let lower = percentColors[iVal - 1];
+    let upper = percentColors[iVal];
+    let range = upper.pct - lower.pct;
+    let rangePct = (pct - lower.pct) / range;
+    let pctLower = 1 - rangePct;
+    let pctUpper = rangePct;
+
+    let color = {
+        r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+        g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+        b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+    };
+
+    return rgbToHex(color.r, color.g, color.b);
+}
+
+export function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function componentToHex(c) {
+    let hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+export function randomHexColor(maxLightness,minLightness) {
+    if(!maxLightness) {
+        maxLightness = 255;
+    }
+
+    if(!minLightness) {
+        minLightness = 0;
+    }
+
+    let r = randomIntFromInterval(minLightness,maxLightness);
+    let g = randomIntFromInterval(minLightness,maxLightness);
+    let b = randomIntFromInterval(minLightness,maxLightness);
+
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+export function hexToRGB(hex) {
+
+    let result;
+
+    if (hex.length == 6 || hex.length == 7) {
+        result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            a: 255,
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    if (hex.length == 8 || hex.length == 9) {
+        result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            a: parseInt(result[1], 16),
+            r: parseInt(result[2], 16),
+            g: parseInt(result[3], 16),
+            b: parseInt(result[4], 16)
+        } : null;
+    }
+
+    return {
+        a: 255,
+        r: 0,
+        g: 0,
+        b: 0
+    };
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
     guid,
     randomArrayElement,
     filenameFromPath,
-    createClassedElement
+    createClassedElement,
+    getColorForPercentage,
+    rgbToHex,
+    randomHexColor,
+    hexToRGB
 };
