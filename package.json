@@ -1,6 +1,6 @@
 {
     "name": "common-helpers",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "A collection of helper functions that can be used in any javascript project.",
     "keywords": ["helpers", "library", "ape apps", "module"],
     "homepage": "https://www.ape-apps.com",

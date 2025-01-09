@@ -79,10 +79,47 @@ export function filenameFromPath(path) {
     return parts[parts.length - 1];
 }
 
+
+/**
+ * Creates an element with optional classes, content, color, and callback
+ * @param {string} tag - The tag name of the element
+ * @param {string} classes - The class name to add to the element
+ * @param {string} content - The content of the element
+ * @param {string} color - The color of the element
+ * @param {function} callback - The callback function for the element
+ * @returns - The created element
+ * */
+export function createClassedElement(tag, classes, content, color, callback) {
+    if(!tag) {
+        return null;
+    }
+
+    const ele = document.createElement(tag);
+
+    if(classes) {
+        ele.className = classes;
+    }
+
+    if(content) {
+        ele.innerHTML = content;
+    }
+
+    if(color) {
+        ele.style.color = color;
+    }
+
+    if(callback) {
+        ele.onclick = callback;
+    }
+
+    return ele;
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
     guid,
     randomArrayElement,
-    filenameFromPath
+    filenameFromPath,
+    createClassedElement
 };

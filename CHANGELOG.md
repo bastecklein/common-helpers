@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.2 - 2025-01-09
+
+### Added
+
+- createClassedElement function
+
 ## 1.0.1 - 2025-01-07
 
 ### Added
