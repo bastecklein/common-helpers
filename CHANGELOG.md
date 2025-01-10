@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.4 - 2025-01-09
+
+### Added
+
+- abbreviateNumber and annotateNumber functions
+
 ## 1.0.3 - 2025-01-09
 
 ### Added

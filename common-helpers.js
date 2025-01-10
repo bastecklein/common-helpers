@@ -231,6 +231,84 @@ export function hexToRGB(hex) {
     };
 }
 
+export function abbreviateNumber(number, maxPlaces, forcePlaces, forceLetter) {
+    number = Number(number);
+    forceLetter = forceLetter || false;
+
+    if(forceLetter !== false) {
+        return annotateNumber(number, maxPlaces, forcePlaces, forceLetter);
+    }
+
+    let abbr;
+
+    if(number >= 1e18) {
+        abbr = "Q";
+    }
+    else if(number >= 1e15) {
+        abbr = "q";
+    }
+    else if(number >= 1e12) {
+        abbr = "T";
+    }
+    else if(number >= 1e9) {
+        abbr = "B";
+    }
+    else if(number >= 1e6) {
+        abbr = "M";
+    }
+    else if(number >= 1e3) {
+        abbr = "K";
+    }
+    else {
+        abbr = "";
+    }
+
+    return annotateNumber(number, maxPlaces, forcePlaces, abbr);
+}
+
+export function annotateNumber(number, maxPlaces, forcePlaces, abbr) {
+    // set places to false to not round
+    let rounded = 0;
+
+    switch(abbr) {
+    case "Q":
+        rounded = number / 1e18;
+        break;
+    case "q":
+        rounded = number / 1e15;
+        break;
+    case "T":
+        rounded = number / 1e12;
+        break;
+    case "B":
+        rounded = number / 1e9;
+        break;
+    case "M":
+        rounded = number / 1e6;
+        break;
+    case "K":
+        rounded = number / 1e3;
+        break;
+    case "":
+        rounded = number;
+        break;
+    }
+
+    if(maxPlaces !== false) {
+        let test = new RegExp("\\.\\d{" + (maxPlaces + 1) + ",}$");
+
+        if(test.test(("" + rounded))) {
+            rounded = rounded.toFixed(maxPlaces);
+        }
+    }
+
+    if(forcePlaces !== false) {
+        rounded = Number(rounded).toFixed(forcePlaces);
+    }
+
+    return rounded + abbr;
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -241,5 +319,7 @@ export default {
     getColorForPercentage,
     rgbToHex,
     randomHexColor,
-    hexToRGB
+    hexToRGB,
+    abbreviateNumber,
+    annotateNumber
 };
