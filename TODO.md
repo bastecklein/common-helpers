@@ -2,7 +2,7 @@
 
 ### Todo
 
-- [] Document abbreviateNumber and annotateNumber functions
+- [] Document abbreviateNumber, annotateNumber, getTimeAgo functions
 
 ### In Progress
 

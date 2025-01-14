@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.5 - 2025-01-14
+
+### Added
+
+- getTimeAgo function
+
 ## 1.0.4 - 2025-01-09
 
 ### Added
