@@ -231,6 +231,14 @@ export function hexToRGB(hex) {
     };
 }
 
+/**
+ * Abbreviates a number
+ * @param {number} number - The number to abbreviate
+ * @param {number} maxPlaces - The maximum number of decimal places
+ * @param {number} forcePlaces - The number of decimal places to
+ * @param {string} forceLetter - The letter to force the abbreviation to
+ * @returns {string} - The abbreviated number
+ * */
 export function abbreviateNumber(number, maxPlaces, forcePlaces, forceLetter) {
     number = Number(number);
     forceLetter = forceLetter || false;
@@ -266,6 +274,14 @@ export function abbreviateNumber(number, maxPlaces, forcePlaces, forceLetter) {
     return annotateNumber(number, maxPlaces, forcePlaces, abbr);
 }
 
+/**
+ * Annotates a number
+ * @param {number} number - The number to annotate
+ * @param {number} maxPlaces - The maximum number of decimal places
+ * @param {number} forcePlaces - The number of decimal places to
+ * @param {string} abbr - The abbreviation to use
+ * @returns {string} - The annotated number
+ * */
 export function annotateNumber(number, maxPlaces, forcePlaces, abbr) {
     // set places to false to not round
     let rounded = 0;
@@ -309,6 +325,11 @@ export function annotateNumber(number, maxPlaces, forcePlaces, abbr) {
     return rounded + abbr;
 }
 
+/**
+ * Returns a human-readable time ago string
+ * @param {number} time - The time to convert to a time ago string
+ * @returns {string} - The time ago string
+ */
 export function getTimeAgo(time) {
     const now = new Date();
     const diff = now - new Date(time);
@@ -352,6 +373,28 @@ export function getTimeAgo(time) {
     return "just now";
 }
 
+/**
+ * Returns the distance between two points
+ * @param {number} x1 - The x-coordinate of the first point
+ * @param {number} y1 - The y-coordinate of the first point
+ * @param {number} x2 - The x-coordinate of the second point
+ * @param {number} y2 - The y-coordinate of the second point
+ * @returns {number} - The distance between the two points
+ */
+export function distBetweenPoints(x1, y1, x2, y2) {
+    return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+}
+
+/**
+ * Splits a string into chunks of a specified length
+ * @param {string} str - The string to split
+ * @param {number} length - The length of each chunk
+ * @returns {Array} - An array of chunks
+ */
+export function chunkString(str, length) {
+    return str.match(new RegExp(".{1," + length + "}", "g"));
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -365,5 +408,7 @@ export default {
     hexToRGB,
     abbreviateNumber,
     annotateNumber,
-    getTimeAgo
+    getTimeAgo,
+    distBetweenPoints,
+    chunkString
 };

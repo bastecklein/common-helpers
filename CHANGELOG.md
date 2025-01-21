@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.6 - 2025-01-21
+
+### Added 
+
+- distBetweenPoints, chunkString functions
+
 ## 1.0.5 - 2025-01-14
 
 ### Added
