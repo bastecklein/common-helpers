@@ -424,5 +424,6 @@ export default {
     annotateNumber,
     getTimeAgo,
     distBetweenPoints,
-    chunkString
+    chunkString,
+    dataURLtoBlob
 };
