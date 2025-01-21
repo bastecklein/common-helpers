@@ -4,7 +4,7 @@
 
 ### Added 
 
-- distBetweenPoints, chunkString, dataURLtoBlob functions
+- distBetweenPoints, chunkString, dataURLtoBlob, removeFromArray functions
 
 ## 1.0.5 - 2025-01-14
 

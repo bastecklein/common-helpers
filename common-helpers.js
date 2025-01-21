@@ -409,6 +409,22 @@ export function dataURLtoBlob(dataurl) {
     return new Blob([u8arr], {type:mime});
 }
 
+/**
+ * Removes a value from an array
+ * @param {Array} arr - The array to remove the value from
+ * @param {any} value - The value to remove
+ * @returns {Array} - The array with the value removed
+ */
+export function removeFromArray(arr, value) {
+    const index = arr.indexOf(value);
+
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+
+    return arr;
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -425,5 +441,6 @@ export default {
     getTimeAgo,
     distBetweenPoints,
     chunkString,
-    dataURLtoBlob
+    dataURLtoBlob,
+    removeFromArray
 };
