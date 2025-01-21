@@ -4,7 +4,7 @@
 
 ### Added 
 
-- distBetweenPoints, chunkString functions
+- distBetweenPoints, chunkString, dataURLtoBlob functions
 
 ## 1.0.5 - 2025-01-14
 
