@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.7 - 2025-01-30
+
+### Added
+
+- hash
+
 ## 1.0.6 - 2025-01-21
 
 ### Added 

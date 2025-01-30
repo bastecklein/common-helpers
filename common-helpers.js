@@ -425,6 +425,34 @@ export function removeFromArray(arr, value) {
     return arr;
 }
 
+/**
+ * Returns a hash of a string
+ * @param {string} str - The string to hash
+ * @returns {number} - The hash of the string
+ */
+export function hash(str) {
+    if(Array.isArray(str)) {
+        const og = str;
+        str = "";
+
+        for(let i = 0; i < og.length; i++) {
+            str += og[i];
+        }
+    }
+
+    let hash = 0, i, chr;
+
+    if (str.length === 0) return hash;
+
+    for (i = 0; i < str.length; i++) {
+        chr   = str.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0;
+    }
+
+    return hash;
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -442,5 +470,6 @@ export default {
     distBetweenPoints,
     chunkString,
     dataURLtoBlob,
-    removeFromArray
+    removeFromArray,
+    hash
 };
