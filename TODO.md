@@ -2,7 +2,7 @@
 
 ### Todo
 
-- [] Document abbreviateNumber, annotateNumber, getTimeAgo, hash functions
+- [] Document abbreviateNumber, annotateNumber, getTimeAgo, hash, getColoredSVG, mergeAndColorSVGs functions
 
 ### In Progress
 

@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.8 - 2025-02-10
+
+### Added
+
+- getColoredSVG, mergeAndColorSVGs
+
 ## 1.0.7 - 2025-01-30
 
 ### Added

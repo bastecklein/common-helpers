@@ -453,6 +453,78 @@ export function hash(str) {
     return hash;
 }
 
+/**
+ * Returns a colored SVG image
+ * @param {string} src - The source of the SVG image
+ * @param {Array} colorReplacements - The colors to replace in the SVG image
+ * @returns {Promise} - The colored SVG image
+ */
+export function getColoredSVG(src, colorReplacements = []) {
+    return new Promise(function(resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", src, true);
+        xhr.responseType = "document";
+        xhr.onload = function() {
+            const svgAsXml = xhr.responseXML;
+            let svgAsString = new XMLSerializer().serializeToString(svgAsXml);
+
+            for(const replacement of colorReplacements) {
+                svgAsString = replaceAll(svgAsString, "fill:" + replacement.from + ";", "fill:" + replacement.to + ";");
+                svgAsString = replaceAll(svgAsString, "stroke:" + replacement.from + ";", "stroke:" + replacement.to + ";");
+            }
+
+            const svgBlob = new Blob([svgAsString], {type: "image/svg+xml"});
+            const url = window.URL.createObjectURL(svgBlob);
+
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = function() {
+                window.URL.revokeObjectURL(svgBlob);
+                resolve(img);
+            };
+            img.src = url;
+        };
+        xhr.onerror = function() {
+            reject();
+        };
+        xhr.send();
+    });
+}
+
+/**
+ * Merges and colors SVG images
+ * @param {Array} instructions - The instructions for the SVG images
+ * @param {string} imgType - The type of image to return
+ * @param {number} imgQuality - The quality of the image
+ * @returns {Promise} - The merged and colored SVG images
+ */
+export async function mergeAndColorSVGs(instructions, imgType = "image/png", imgQuality = 1) {
+    const allImages = [];
+
+    while(instructions.length > 0) {
+        const instruction = instructions.shift();
+        const colorReplacements = instruction.colors;
+        const img = await getColoredSVG(instruction.src, colorReplacements);
+        allImages.push(img);
+    }
+
+    if(allImages.length === 0) {
+        return null;
+    }
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = allImages[0].width;
+    canvas.height = allImages[0].height;
+
+    allImages.forEach(function(img) {
+        ctx.drawImage(img, 0, 0);
+    });
+
+    return canvas.toDataURL(imgType, imgQuality);
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -471,5 +543,7 @@ export default {
     chunkString,
     dataURLtoBlob,
     removeFromArray,
-    hash
+    hash,
+    getColoredSVG,
+    mergeAndColorSVGs
 };
