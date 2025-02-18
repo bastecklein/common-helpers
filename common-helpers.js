@@ -460,7 +460,15 @@ export function hash(str) {
  * @returns {Promise} - The colored SVG image
  */
 export function getColoredSVG(src, colorReplacements = []) {
+
+    
+
     return new Promise(function(resolve, reject) {
+        if(src.toLowerCase().startsWith("<?xml")) {
+            buildImageFromSVGString(src, colorReplacements, resolve);
+            return;
+        }
+
         const xhr = new XMLHttpRequest();
         xhr.open("GET", src, true);
         xhr.responseType = "document";
@@ -468,27 +476,31 @@ export function getColoredSVG(src, colorReplacements = []) {
             const svgAsXml = xhr.responseXML;
             let svgAsString = new XMLSerializer().serializeToString(svgAsXml);
 
-            for(const replacement of colorReplacements) {
-                svgAsString = replaceAll(svgAsString, "fill:" + replacement.from + ";", "fill:" + replacement.to + ";");
-                svgAsString = replaceAll(svgAsString, "stroke:" + replacement.from + ";", "stroke:" + replacement.to + ";");
-            }
-
-            const svgBlob = new Blob([svgAsString], {type: "image/svg+xml"});
-            const url = window.URL.createObjectURL(svgBlob);
-
-            const img = new Image();
-            img.crossOrigin = "anonymous";
-            img.onload = function() {
-                window.URL.revokeObjectURL(svgBlob);
-                resolve(img);
-            };
-            img.src = url;
+            buildImageFromSVGString(svgAsString, colorReplacements, resolve);
         };
         xhr.onerror = function() {
             reject();
         };
         xhr.send();
     });
+}
+
+function buildImageFromSVGString(svgAsString, colorReplacements, resolve) {
+    for(const replacement of colorReplacements) {
+        svgAsString = replaceAll(svgAsString, "fill:" + replacement.from + ";", "fill:" + replacement.to + ";");
+        svgAsString = replaceAll(svgAsString, "stroke:" + replacement.from + ";", "stroke:" + replacement.to + ";");
+    }
+
+    const svgBlob = new Blob([svgAsString], {type: "image/svg+xml"});
+    const url = window.URL.createObjectURL(svgBlob);
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = function() {
+        window.URL.revokeObjectURL(svgBlob);
+        resolve(img);
+    };
+    img.src = url;
 }
 
 /**
