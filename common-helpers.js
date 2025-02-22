@@ -553,6 +553,24 @@ export function numberWithCommas(x) {
     return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+/**
+ * Rebuilds a standard object
+ * @param {object} obj - The object to rebuild
+ * @param {object} type - The type of object to rebuild
+ * @returns {object} - The rebuilt object
+ */
+export function rebuildStandardObject(obj, type) {
+    const newOb = new type();
+
+    for(const key in newOb) {
+        if(obj[key] !== undefined) {
+            newOb[key] = obj[key];
+        }
+    }
+
+    return newOb;
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -574,5 +592,6 @@ export default {
     hash,
     getColoredSVG,
     mergeAndColorSVGs,
-    numberWithCommas
+    numberWithCommas,
+    rebuildStandardObject
 };

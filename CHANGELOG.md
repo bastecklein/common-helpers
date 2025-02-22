@@ -4,7 +4,7 @@
 
 ### Added
 
-- numberWithCommas
+- numberWithCommas, rebuildStandardObject
 
 ## 1.0.8 - 2025-02-10
 
