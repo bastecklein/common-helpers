@@ -537,6 +537,22 @@ export async function mergeAndColorSVGs(instructions, imgType = "image/png", img
     return canvas.toDataURL(imgType, imgQuality);
 }
 
+/**
+ * Formats a number with commas
+ * @param {number} x - The number to format
+ * @returns {string} - The formatted number
+ */
+export function numberWithCommas(x) {
+    if(!x) {
+        x = 0;
+    }
+
+    x = parseFloat(x);
+
+    let formattedNumber = x.toFixed(2).replace(/[.,]00$/, "");
+    return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export default {
     randomIntFromInterval,
     replaceAll,
@@ -557,5 +573,6 @@ export default {
     removeFromArray,
     hash,
     getColoredSVG,
-    mergeAndColorSVGs
+    mergeAndColorSVGs,
+    numberWithCommas
 };

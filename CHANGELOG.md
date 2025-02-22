@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.9 - 2025-02-22
+
+### Added
+
+- numberWithCommas
+
 ## 1.0.8 - 2025-02-10
 
 ### Added
