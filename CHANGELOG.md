@@ -1,5 +1,11 @@
 # common-helpers changelog
 
+## 1.0.10 - 2025-04-09
+
+### Added
+
+- shuffleArray
+
 ## 1.0.9 - 2025-02-22
 
 ### Added
